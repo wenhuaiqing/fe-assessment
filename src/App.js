@@ -26,7 +26,7 @@ export default class App extends Component {
               <nav>
                 <ul className="list-group">
                   <li className="list-group-item">
-                    <Link to="/">All Codes</Link>
+                    <Link to="/AllCodes">All Codes</Link>
                   </li>
                   <li className="list-group-item">
                     <Link to="/Horse">Horse</Link>
