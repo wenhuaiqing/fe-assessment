@@ -1,21 +1,22 @@
 import React, { Component } from "react";
+import secToDatetime from "../misc/dateconverter";
 
 export default class AllCodes extends Component {
   constructor(props) {
     super(props);
-    // this.handlePostChange = this.handlePostChange.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
-  //   handlePostChange(races) {
-  //     this.props.handlePostChange(races);
-  //   }
+  handleChange(races) {
+    this.props.handleChange(races);
+  }
 
   fetchList = () => {
     fetch("https://api.neds.com.au/rest/v1/racing/?method=nextraces&count=10")
       .then((response) => response.json())
-      .then((r) => console.log(r.data.race_summaries))
-      .then((json) => {
-        // this.handlePostChange(json);
+      .then((r) => {
+        console.log(r.data.race_summaries);
+        this.handleChange(r.data.race_summaries);
       });
   };
 
@@ -24,6 +25,15 @@ export default class AllCodes extends Component {
   }
 
   render() {
-    return <ul></ul>;
+    return (
+      <ul>
+        {Object.entries(this.props.races).map((r) => (
+          <li key={r[1].race_id}>
+            Meeting Name: {r[1].meeting_name}, Race Number: {r[1].race_number},
+            Start Datetime: {secToDatetime(r[1].advertised_start.seconds)}
+          </li>
+        ))}
+      </ul>
+    );
   }
 }

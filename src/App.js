@@ -13,6 +13,16 @@ import AllCodes from "./components/AllCodes";
 import Horse from "./components/Horse";
 
 export default class App extends Component {
+  constructor(props) {
+    super(props);
+    this.handleChange = this.handleChange.bind(this);
+    this.state = { races: {} };
+  }
+
+  handleChange(races) {
+    this.setState({ races: races });
+  }
+
   render() {
     return (
       <Router>
@@ -44,7 +54,10 @@ export default class App extends Component {
             <div className="col-md-10">
               <Switch>
                 <Route path="/AllCodes">
-                  <AllCodes />
+                  <AllCodes
+                    races={this.state.races}
+                    handleChange={this.handleChange}
+                  />
                 </Route>
                 <Route path="/Horse">
                   <Horse />
