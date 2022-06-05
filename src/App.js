@@ -11,19 +11,24 @@ import Greyhound from "./components/Greyhound";
 import Harness from "./components/Harness";
 import AllCodes from "./components/AllCodes";
 import Horse from "./components/Horse";
+import ArrayList from "./misc/bubbleSort";
 
 export default class App extends Component {
   constructor(props) {
     super(props);
     this.handleChange = this.handleChange.bind(this);
-    this.state = { races: {} };
+    this.state = { races: [] };
   }
 
   handleChange(races) {
-    this.setState({ races: races });
+    let list = new ArrayList();
+    Object.entries(races).forEach((r) => list.insert(r));
+    list.bubbleSort();
+    this.setState({ races: list });
   }
 
   render() {
+    console.log(this.state.races);
     return (
       <Router>
         <div className="container">
