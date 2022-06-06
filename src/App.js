@@ -97,13 +97,13 @@ export default class App extends Component {
                   />
                 </Route>
                 <Route path="/Horse">
-                  <Horse />
+                  <Horse races={this.state.races} />
                 </Route>
                 <Route exact path="/Harness">
-                  <Harness />
+                  <Harness races={this.state.races} />
                 </Route>
                 <Route exact path="/Greyhound">
-                  <Greyhound />
+                  <Greyhound races={this.state.races} />
                 </Route>
               </Switch>
             </div>
