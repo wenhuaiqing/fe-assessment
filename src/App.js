@@ -32,21 +32,10 @@ export default class App extends Component {
   }
 
   updateRaces() {
-    console.log(this.state.races);
     const currentDateTime = new Date();
     const currentSeconds = currentDateTime.getTime() / 1000;
-    console.log(currentSeconds);
-    console.log(this.state.races["array"]);
-    // if (this.state.races["array"].length == 0) return 0;
     this.state.races["array"].forEach((race, index) => {
-      if (
-        race[1].advertised_start.seconds <
-        currentDateTime.getTime() / 1000 - 60
-      ) {
-        console.log(
-          race[1].advertised_start.seconds <
-            currentDateTime.getTime() / 1000 - 60
-        );
+      if (race[1].advertised_start.seconds < currentSeconds - 60) {
         this.state.races["array"].splice(index, 1);
       }
     });
@@ -64,7 +53,6 @@ export default class App extends Component {
   }
 
   render() {
-    console.log(this.state.races);
     return (
       <Router>
         <div className="container">

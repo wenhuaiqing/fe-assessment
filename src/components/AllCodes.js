@@ -9,7 +9,6 @@ export default class AllCodes extends Component {
       races = this.props.races["array"];
     }
 
-    console.log(races);
     if (races) {
       return (
         <ol>
@@ -17,7 +16,7 @@ export default class AllCodes extends Component {
             <li key={r[0]}>
               Meeting Name: {r[1].meeting_name}, Race Number: {r[1].race_number}
               , Start Datetime: {secToDatetime(r[1].advertised_start.seconds)},{" "}
-              <i class="fa-solid fa-hourglass"></i>{" "}
+              <i className="fa-solid fa-hourglass"></i>{" "}
               {secToTimer(r[1].advertised_start.seconds)},
             </li>
           ))}

@@ -25,9 +25,11 @@ export default class Home extends Component {
   }
 
   render() {
-    let races = this.props.races["array"]
-      ? this.props.races["array"] //.slice(0, 5)
-      : this.props.races;
+    let races = [];
+
+    if (this.props.races["array"]) {
+      races = this.props.races["array"];
+    }
     console.log(races);
     if (this.props.races["array"]) {
       return (
