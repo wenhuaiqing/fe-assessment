@@ -12,7 +12,7 @@ import Harness from "./components/Harness";
 import AllCodes from "./components/AllCodes";
 import Horse from "./components/Horse";
 import ArrayList from "./misc/bubbleSort";
-import fetchList from "./misc/fetchList";
+import Home from "./components/Home";
 
 export default class App extends Component {
   constructor(props) {
@@ -49,7 +49,7 @@ export default class App extends Component {
     this.setState({ races: this.state.races });
 
     if (this.state.races["array"].length <= 5) {
-      fetch("https://api.neds.com.au/rest/v1/racing/?method=nextraces&count=10")
+      fetch("https://api.neds.com.au/rest/v1/racing/?method=nextraces&count=40")
         .then((response) => response.json())
         .then((r) => {
           console.log(r.data.race_summaries);
@@ -65,7 +65,7 @@ export default class App extends Component {
       <Router>
         <div className="container">
           <div className="row">
-            <h1 className="mt-3">NEXT RACES</h1>
+            <h1 className="mt-3">SELECT TO SEE NEXT 5 RACES</h1>
             <hr className="mb-3"></hr>
           </div>
           <div className="row">
@@ -90,13 +90,16 @@ export default class App extends Component {
 
             <div className="col-md-10">
               <Switch>
-                <Route path="/AllCodes">
-                  <AllCodes
+                <Route exact path="/">
+                  <Home
                     races={this.state.races}
                     handleChange={this.handleChange}
                   />
                 </Route>
-                <Route path="/Horse">
+                <Route exact path="/AllCodes">
+                  <AllCodes races={this.state.races} />
+                </Route>
+                <Route exact path="/Horse">
                   <Horse races={this.state.races} />
                 </Route>
                 <Route exact path="/Harness">

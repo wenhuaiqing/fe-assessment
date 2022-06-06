@@ -14,14 +14,14 @@ export default class Greyhound extends Component {
     console.log(races);
     if (races) {
       return (
-        <ul>
+        <ol>
           {races.slice(0, 5).map((r) => (
             <li key={r[0]}>
               Meeting Name: {r[1].meeting_name}, Race Number: {r[1].race_number}
               , Start Datetime: {secToDatetime(r[1].advertised_start.seconds)}
             </li>
           ))}
-        </ul>
+        </ol>
       );
     }
     return <div>No greyhound race at this time, please try later</div>;
