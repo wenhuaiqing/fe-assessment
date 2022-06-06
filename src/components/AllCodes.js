@@ -16,11 +16,12 @@ export default class AllCodes extends Component {
       .then((response) => response.json())
       .then((r) => {
         console.log(r.data.race_summaries);
+        this.handleChange(r.data.race_summaries);
       });
   };
 
   componentDidMount() {
-    this.handleChange(fetchList());
+    this.fetchList();
   }
 
   render() {

@@ -28,6 +28,7 @@ export default class App extends Component {
     this.setState({ races: list });
     console.log(this.state.races);
     this.updateRaces();
+    console.log(this.state.races);
   }
 
   updateRaces() {
@@ -35,15 +36,27 @@ export default class App extends Component {
     const currentDateTime = new Date();
     const currentSeconds = currentDateTime.getTime() / 1000;
     console.log(currentSeconds);
-    if (this.state.races["array"].length == 0) return 0;
-    this.state.races["array"].forEach((race, index, object) => {
+    console.log(this.state.races["array"]);
+    // if (this.state.races["array"].length == 0) return 0;
+    this.state.races["array"].forEach((race, index) => {
       if (race[1].advertised_start.seconds < currentDateTime.getTime() / 1000) {
-        object.splice(index, 1);
+        console.log(
+          race[1].advertised_start.seconds < currentDateTime.getTime() / 1000
+        );
+        this.state.races["array"].splice(index, 1);
       }
     });
-    if (this.state.races["array"].length >= 5) {
-      console.log(fetchList());
+    this.setState({ races: this.state.races });
+
+    if (this.state.races["array"].length <= 5) {
+      fetch("https://api.neds.com.au/rest/v1/racing/?method=nextraces&count=10")
+        .then((response) => response.json())
+        .then((r) => {
+          console.log(r.data.race_summaries);
+          this.handleChange(r.data.race_summaries);
+        });
     }
+    setTimeout(this.updateRaces.bind(this), 1000);
   }
 
   render() {
