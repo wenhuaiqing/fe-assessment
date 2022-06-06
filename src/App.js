@@ -39,9 +39,13 @@ export default class App extends Component {
     console.log(this.state.races["array"]);
     // if (this.state.races["array"].length == 0) return 0;
     this.state.races["array"].forEach((race, index) => {
-      if (race[1].advertised_start.seconds < currentDateTime.getTime() / 1000) {
+      if (
+        race[1].advertised_start.seconds <
+        currentDateTime.getTime() / 1000 - 60
+      ) {
         console.log(
-          race[1].advertised_start.seconds < currentDateTime.getTime() / 1000
+          race[1].advertised_start.seconds <
+            currentDateTime.getTime() / 1000 - 60
         );
         this.state.races["array"].splice(index, 1);
       }

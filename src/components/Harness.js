@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from "react";
-import secToDatetime from "../misc/dateconverter";
+import secToDatetime, { secToTimer } from "../misc/dateconverter";
 
 export default class Harness extends Component {
   render() {
@@ -18,7 +18,9 @@ export default class Harness extends Component {
           {races.slice(0, 5).map((r) => (
             <li key={r[0]}>
               Meeting Name: {r[1].meeting_name}, Race Number: {r[1].race_number}
-              , Start Datetime: {secToDatetime(r[1].advertised_start.seconds)}
+              , Start Datetime: {secToDatetime(r[1].advertised_start.seconds)},{" "}
+              <i class="fa-solid fa-hourglass"></i>{" "}
+              {secToTimer(r[1].advertised_start.seconds)},
             </li>
           ))}
         </ol>

@@ -11,10 +11,6 @@ export default class Horse extends Component {
       );
     }
 
-    console.log(races);
-    const currentDateTime = new Date();
-    const currentSeconds = currentDateTime.getTime() / 1000;
-
     if (races) {
       return (
         <ol>
@@ -22,10 +18,8 @@ export default class Horse extends Component {
             <li key={r[0]}>
               Meeting Name: {r[1].meeting_name}, Race Number: {r[1].race_number}
               , Start Datetime: {secToDatetime(r[1].advertised_start.seconds)},{" "}
-              {secToTimer(
-                Math.floor(r[1].advertised_start.seconds - currentSeconds)
-              )}
-              , {Math.floor(r[1].advertised_start.seconds - currentSeconds)}
+              <i class="fa-solid fa-hourglass"></i>{" "}
+              {secToTimer(r[1].advertised_start.seconds)},
             </li>
           ))}
         </ol>
