@@ -12,6 +12,7 @@ import Harness from "./components/Harness";
 import AllCodes from "./components/AllCodes";
 import Horse from "./components/Horse";
 import ArrayList from "./misc/bubbleSort";
+import fetchList from "./misc/fetchList";
 
 export default class App extends Component {
   constructor(props) {
@@ -25,6 +26,24 @@ export default class App extends Component {
     Object.entries(races).forEach((r) => list.insert(r));
     list.bubbleSort();
     this.setState({ races: list });
+    console.log(this.state.races);
+    this.updateRaces();
+  }
+
+  updateRaces() {
+    console.log(this.state.races);
+    const currentDateTime = new Date();
+    const currentSeconds = currentDateTime.getTime() / 1000;
+    console.log(currentSeconds);
+    if (this.state.races["array"].length == 0) return 0;
+    this.state.races["array"].forEach((race, index, object) => {
+      if (race[1].advertised_start.seconds < currentDateTime.getTime() / 1000) {
+        object.splice(index, 1);
+      }
+    });
+    if (this.state.races["array"].length >= 5) {
+      console.log(fetchList());
+    }
   }
 
   render() {

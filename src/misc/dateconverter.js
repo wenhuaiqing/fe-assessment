@@ -5,9 +5,6 @@ export default function secToDatetime(sec) {
   const seconds = date.getSeconds();
   //   const formattedTime =
   //     hours + ":" + minutes.substr(-2) + ":" + seconds.substr(-2);
-  console.log(hours);
-  console.log(minutes);
-  console.log(seconds);
 
   return date.toLocaleString();
 }
